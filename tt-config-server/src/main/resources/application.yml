@@ -10,6 +10,8 @@ spring:
         git:
           uri: https://github.com/mrTwice/2025-05-otus-spring-Yampolskiy-attestation.git
           default-label: tt-mvp
+          search-paths:
+            - config-repo
           clone-on-start: true
 
 logging:
