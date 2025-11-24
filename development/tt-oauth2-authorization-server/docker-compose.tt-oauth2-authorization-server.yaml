@@ -23,6 +23,7 @@ services:
       - db-net
 
   tt-oauth2-authorization-server:
+    restart: on-failure
     build:
       context: ../../tt-oauth2-authorization-server
       dockerfile: Dockerfile
@@ -38,9 +39,9 @@ services:
       - db-net
     depends_on:
       tt-config-server:
-        condition: service_started
-      tt-oauth2-authorization-server-postgres:
         condition: service_healthy
+      tt-oauth2-authorization-server-postgres:
+        condition: service_started
       tt-user-service:
         condition: service_started
       tt-task-service:

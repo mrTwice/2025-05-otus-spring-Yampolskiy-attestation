@@ -1,5 +1,6 @@
 services:
   tt-api-gateway:
+    restart: on-failure
     build:
       context: ../../tt-api-gateway
       dockerfile: Dockerfile
@@ -15,7 +16,7 @@ services:
       - db-net
     depends_on:
       tt-config-server:
-        condition: service_started
+        condition: service_healthy
       tt-oauth2-authorization-server:
         condition: service_started
       tt-user-service:

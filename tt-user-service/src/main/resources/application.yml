@@ -3,5 +3,10 @@ spring:
     name: tt-user-service
   cloud:
     config:
+      retry:
+        max-attempts: 10
+        initial-interval: 1000   # 1s
+        max-interval: 5000       # 5s
+        multiplier: 1.5
       username: config-client-user-service
       password: config-secret-user

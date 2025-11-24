@@ -14,6 +14,15 @@ spring:
             - config-repo
           clone-on-start: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
 logging:
   level:
     org.springframework.security: DEBUG

@@ -1,5 +1,12 @@
 services:
   tt-config-server:
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8888/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     build:
       context: ../../tt-config-server
       dockerfile: Dockerfile

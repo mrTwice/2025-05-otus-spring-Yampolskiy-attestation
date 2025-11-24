@@ -23,6 +23,7 @@ services:
       - db-net
 
   tt-task-service:
+    restart: on-failure
     build:
       context: ../../tt-task-service
       dockerfile: Dockerfile
@@ -40,4 +41,4 @@ services:
       tt-task-service-postgres:
         condition: service_healthy
       tt-config-server:
-        condition: service_started
+        condition: service_healthy

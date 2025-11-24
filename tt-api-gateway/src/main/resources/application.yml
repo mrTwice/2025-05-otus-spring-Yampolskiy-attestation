@@ -3,5 +3,10 @@ spring:
     name: tt-api-gateway
   cloud:
     config:
+      retry:
+        max-attempts: 10
+        initial-interval: 1000   # 1s
+        max-interval: 5000       # 5s
+        multiplier: 1.5
       username: config-client-api-gateway
       password: config-secret-api-gateway
