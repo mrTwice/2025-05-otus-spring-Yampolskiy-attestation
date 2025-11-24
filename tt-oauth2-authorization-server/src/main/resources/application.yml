@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: tt-oauth2-authorization-server
+  cloud:
+    config:
+      username: config-client-auth-server
+      password: config-secret-auth

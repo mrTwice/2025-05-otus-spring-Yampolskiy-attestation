@@ -1,0 +1,15 @@
+services:
+  tt-config-server:
+    build:
+      context: ../../tt-config-server
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    image: tt-config-server:latest
+    container_name: tt-config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker,git
+    ports:
+      - "8888:8888"
+    networks:
+      - db-net

@@ -1,0 +1,11 @@
+include:
+  - tt-config-server/docker-compose.tt-config-server.yaml
+  - tt-api-gateway/docker-compose.tt-api-gateway.yaml
+  - tt-task-service/docker-compose.tt-task-service.yaml
+  - tt-user-service/docker-compose.tt-user-service.yaml
+  - tt-oauth2-authorization-server/docker-compose.tt-oauth2-authorization-server.yaml
+
+networks:
+  db-net:
+    name: db-net
+    driver: bridge

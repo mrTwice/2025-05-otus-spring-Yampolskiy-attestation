@@ -1,0 +1,4 @@
+ALTER TABLE users
+    ADD COLUMN is_locked BOOLEAN NOT NULL DEFAULT false,
+    ADD COLUMN credentials_expire_at TIMESTAMP WITH TIME ZONE,
+    ADD COLUMN account_expire_at TIMESTAMP WITH TIME ZONE;

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: tt-api-gateway
+  cloud:
+    config:
+      username: config-client-api-gateway
+      password: config-secret-api-gateway

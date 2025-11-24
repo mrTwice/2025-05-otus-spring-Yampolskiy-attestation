@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: tt-user-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 4
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: swagger-client-user-service
+      client-secret: swagger-secret
+      use-basic-authentication-with-access-code-grant: true
+      scopes: openid,profile,offline_access
+
+gateway:
+  public-base-uri: http://localhost:8085  # Api Gateway по умолчанию
+
+openapi:
+  server-url: ${gateway.public-base-uri}

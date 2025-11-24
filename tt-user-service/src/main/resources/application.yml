@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: tt-user-service
+  cloud:
+    config:
+      username: config-client-user-service
+      password: config-secret-user

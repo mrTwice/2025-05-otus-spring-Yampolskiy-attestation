@@ -1,0 +1,24 @@
+services:
+  tt-api-gateway:
+    build:
+      context: ../../tt-api-gateway
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    image: tt-api-gateway:latest
+    container_name: tt-api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8085:8085"
+    networks:
+      - db-net
+    depends_on:
+      tt-config-server:
+        condition: service_started
+      tt-oauth2-authorization-server:
+        condition: service_started
+      tt-user-service:
+        condition: service_started
+      tt-task-service:
+        condition: service_started

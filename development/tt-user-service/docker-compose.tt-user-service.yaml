@@ -1,0 +1,43 @@
+services:
+  tt-user-service-postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    image: postgres_custom_ru:latest
+    container_name: tt-user-service-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-U", "postgres"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - db-net
+
+  tt-user-service:
+    build:
+      context: ../../tt-user-service
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    image: tt-user-service:latest
+    container_name: tt-user-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "9591:9591"
+    networks:
+      - db-net
+    depends_on:
+      tt-user-service-postgres:
+        condition: service_healthy
+      tt-config-server:
+        condition: service_started

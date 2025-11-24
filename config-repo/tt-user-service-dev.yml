@@ -1,0 +1,25 @@
+server:
+  port: 9591
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/tt_user_service
+    username: tt_user_service_admin
+    password: tt_user_service_admin
+
+  jpa:
+    show-sql: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+
+springdoc:
+  swagger-ui:
+    oauth2-redirect-url: ${gateway.public-base-uri}/user/swagger-ui/oauth2-redirect.html
