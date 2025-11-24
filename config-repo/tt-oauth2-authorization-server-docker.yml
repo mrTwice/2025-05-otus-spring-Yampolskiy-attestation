@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  forward-headers-strategy: native
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://tt-oauth2-authorization-server-postgres:5432/tt_oauth2_authorization_server
+    username: tt_oauth2_authorization_server_admin
+    password: tt_oauth2_authorization_server_admin
+
+auth-server:
+  base-uri: http://tt-oauth2-authorization-server:8080
+
+user-service:
+  base-uri: http://tt-user-service:9591
+  public-base-uri: http://localhost:9591
+
+task-service:
+  public-base-uri: http://localhost:9590
+
+gateway:
+  public-base-uri: http://localhost:8085
+
+swagger:
+  user-service:
+    redirect-url: "${gateway.public-base-uri}/user/swagger-ui/oauth2-redirect.html"
+  task-service:
+    redirect-url: "${gateway.public-base-uri}/task/swagger-ui/oauth2-redirect.html"

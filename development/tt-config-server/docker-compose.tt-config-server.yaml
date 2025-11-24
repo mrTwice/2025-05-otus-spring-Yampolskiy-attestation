@@ -1,0 +1,22 @@
+services:
+  tt-config-server:
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8888/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    build:
+      context: ../../tt-config-server
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    image: tt-config-server:latest
+    container_name: tt-config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker,git
+    ports:
+      - "8888:8888"
+    networks:
+      - db-net

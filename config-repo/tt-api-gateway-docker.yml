@@ -1,0 +1,19 @@
+server:
+  port: 8085
+
+auth-server:
+  issuer-uri: http://tt-oauth2-authorization-server:8080
+
+tt:
+  services:
+    user-service:
+      uri: http://tt-user-service:9591
+    task-service:
+      uri: http://tt-task-service:9590
+    auth-service:
+      uri: http://tt-oauth2-authorization-server:8080
+
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    org.springframework.security: INFO

@@ -1,0 +1,15 @@
+server:
+  port: 9590
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tt_task_service
+    username: tt_task_service_admin
+    password: tt_task_service_admin
+
+springdoc:
+  swagger-ui:
+    oauth2-redirect-url: ${gateway.public-base-uri}/task/swagger-ui/oauth2-redirect.html

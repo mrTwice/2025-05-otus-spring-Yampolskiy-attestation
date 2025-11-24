@@ -1,0 +1,34 @@
+server:
+  port: 9591
+  forward-headers-strategy: framework
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://tt-user-service-postgres:5432/tt_user_service
+    username: tt_user_service_admin
+    password: tt_user_service_admin
+
+  jpa:
+    show-sql: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://tt-oauth2-authorization-server:8080
+
+gateway:
+  public-base-uri: http://localhost:8085
+
+openapi:
+  server-url: ${gateway.public-base-uri}
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    config-url: /user/v3/api-docs/swagger-config
+    url: /user/v3/api-docs
+    oauth2-redirect-url: ${gateway.public-base-uri}/user/swagger-ui/oauth2-redirect.html
